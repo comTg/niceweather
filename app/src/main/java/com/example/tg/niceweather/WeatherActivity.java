@@ -1,5 +1,6 @@
 package com.example.tg.niceweather;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.tg.niceweather.gson.Forecast;
 import com.example.tg.niceweather.gson.Weather;
+import com.example.tg.niceweather.service.AutoUpdateService;
 import com.example.tg.niceweather.util.HttpUtil;
 import com.example.tg.niceweather.util.Utility;
 
@@ -192,6 +194,8 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 
     /**
