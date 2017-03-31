@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.example.tg.niceweather.db.City;
 import com.example.tg.niceweather.db.Country;
 import com.example.tg.niceweather.db.Province;
+import com.example.tg.niceweather.gson.Weather;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -82,4 +83,20 @@ public class Utility {
         }
         return false;
     }
+
+    /**
+     * 将返回的json数据解析成weather类
+     */
+    public static Weather handleWeatherResponse(String response){
+        try{
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather5");
+            String weatherContent = jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(weatherContent,Weather.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
